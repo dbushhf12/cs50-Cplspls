@@ -1,0 +1,64 @@
+//take amount of change owed as input and return the minimum number of coins need to make change as output
+
+#include <iostream>
+using namespace std;
+
+int main()
+{
+    int coins = 0; //assigned value of minimum number of coins required to make change 
+    int quart = 0; //holds number of quarters
+    int dime = 0; //holds number of dimes
+    int nick = 0; //holds number of nickels
+    int pen = 0; //holds number of pennies
+    int cents = 0; //assigned value of float 'change' as integer 
+    float change;
+
+    do
+    {
+        cout << "How much change do I owe you? (0.00 format) " << endl;
+        cin >> change;
+    } while (change < 0);
+
+    cents = round(change * 100);
+
+    while (cents >= 25) //calculates number of quarters
+    {
+        cents = cents - 25;
+        quart++;
+        coins++;
+    }
+
+    while (cents >= 10) //calculates number of dimes
+    {
+        cents = cents - 10;
+        dime++;
+        coins++;
+    }
+
+    while (cents >= 5) //calculates number of nickels
+    {
+        cents = cents - 5;
+        nick++;
+        coins++;
+    }
+
+    while (cents >= 1) //calculates number of pennies
+    {
+        cents = cents - 1;
+        pen++;
+        coins++;
+    }
+
+    cout << quart << " quarters" << endl;
+    
+    cout << dime << " dimes" << endl;
+
+    cout << nick << " nickelss" << endl;
+
+    cout << pen << " pennies" << endl;
+
+    cout << coins << " total coins" << endl;
+
+    system("pause");        //keep console window open after execution;
+
+}
