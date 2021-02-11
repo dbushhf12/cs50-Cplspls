@@ -1,0 +1,40 @@
+// Build a two sided pyramid of n height and width with a gap down the center
+
+
+#include <iostream>
+using namespace std;
+
+
+int main()
+{
+    int b;
+    do                                          //do, while loop; do "x" while "y" is true.
+        {
+        cout << "Pyramid Size: " << endl;
+        cin >> b;
+        } 
+    while (b < 1 || b > 8);                     //user must give a value of 1-8
+
+    for (int c = 1; c <= b; c++)                // this dictates number of rows
+    {
+       for (int d = b; d > c; d--)             //this dictates number of columns; note, d should be 1 less than c, else you will get a block of equal height and width
+       {
+         cout << " ";                        //this creates an 'invisible' left aligned, inverted pyramid
+       }
+       for (int e = 1; e <= c; e++)            //this creates the visible, righ aligned pyramid. As d decreases by 1, e increases by 1
+         {
+                cout << "#";
+            }
+
+            printf("  ");                       //creates gap between left and right aligned pyramids 
+
+            for (int f = 1; f <= c; f++)            //this dictates number of columns; note, d should be 1 less than c, else you will get a block of equal height and width
+            {
+                cout << "#";
+            }
+
+            cout << endl;
+
+        }
+    system("pause");        //keep console window open after execution
+}
