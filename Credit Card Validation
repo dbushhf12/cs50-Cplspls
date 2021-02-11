@@ -1,0 +1,167 @@
+//Create a program that takes a credit card number as input and returns number verification and card type as output.
+//Verfication calculated using Luhn's Algorithm
+//Card type verified using merchant specifications
+
+
+#include <iostream>
+using namespace std;
+
+int main()
+{
+    long long crednum; //variable that will be assigned user's credit card number
+    long frstlst = 0;
+    long scdlst = 0;    //variable that will be assigned second to last digit in cc#
+    long thrdlst = 0;
+    long frthlst = 0;
+    long fthlst = 0;
+    long sixlst = 0;
+    long svthlst = 0;
+    long ethlst = 0;
+    long nthlst = 0;
+    long tenlst = 0;
+    long elvnlst = 0;
+    long twlvlst = 0;
+    long thrtnlst = 0;
+    long frtnlst = 0;
+    long ftnlst = 0;
+    long sxtnlst = 0;
+
+
+    do
+    {
+        cout << "Please enter your credit card number: " << endl;
+        cin >> crednum;
+    } while (crednum < 0);
+
+
+    long long crednum1 = crednum;
+    long long crednum2 = crednum;
+
+    //starts counting with last digit
+    frstlst = crednum1 % 10;
+    crednum1 = crednum1 / 100;
+
+    thrdlst = crednum1 % 10;
+    crednum1 = crednum1 / 100;
+
+    fthlst = crednum1 % 10;
+    crednum1 = crednum1 / 100;
+
+    svthlst = crednum1 % 10;
+    crednum1 = crednum1 / 100;
+
+    nthlst = crednum1 % 10;
+    crednum1 = crednum1 / 100;
+
+    elvnlst = crednum1 % 10;
+    crednum1 = crednum1 / 100;
+
+    thrtnlst = crednum1 % 10;
+    crednum1 = crednum1 / 100;
+
+    ftnlst = crednum1 % 10;
+    crednum1 = crednum1 / 100;
+
+    //starts counting with second to last digit   
+    crednum2 = crednum / 10;
+
+    scdlst = crednum2 % 10 * 2;
+    crednum2 = crednum2 / 100;
+
+    if (scdlst > 9)
+    {
+        scdlst = scdlst - 10 + 1;
+    }
+
+    frthlst = crednum2 % 10 * 2;
+    crednum2 = crednum2 / 100;
+
+    if (frthlst > 9)
+    {
+        frthlst = frthlst - 10 + 1;
+    }
+
+    sixlst = crednum2 % 10 * 2;
+    crednum2 = crednum2 / 100;
+
+    if (sixlst > 9)
+    {
+        sixlst = sixlst - 10 + 1;
+    }
+
+    ethlst = crednum2 % 10 * 2;
+    crednum2 = crednum2 / 100;
+
+    if (ethlst > 9)
+    {
+        ethlst = ethlst - 10 + 1;
+    }
+
+    tenlst = crednum2 % 10 * 2;
+    crednum2 = crednum2 / 100;
+
+    if (tenlst > 9)
+    {
+        tenlst = tenlst - 10 + 1;
+    }
+
+    twlvlst = crednum2 % 10 * 2;
+    crednum2 = crednum2 / 100;
+
+    if (twlvlst > 9)
+    {
+        twlvlst = twlvlst - 10 + 1;
+    }
+
+    frtnlst = crednum2 % 10 * 2;
+    crednum2 = crednum2 / 100;
+
+    if (frtnlst > 9)
+    {
+        frtnlst = frtnlst - 10 + 1;
+    }
+
+    sxtnlst = crednum2 % 10 * 2;
+    crednum2 = crednum2 / 100;
+
+    if (sxtnlst > 9)
+    {
+        sxtnlst = sxtnlst - 10 + 1;
+    }
+
+    long sum1 = frstlst + thrdlst + fthlst + svthlst + nthlst + elvnlst + thrtnlst + ftnlst;
+    long sum2 = scdlst + frthlst + sixlst + ethlst + tenlst + twlvlst + frtnlst + sxtnlst;
+    long sum3 = (sum1 + sum2) % 10;
+
+    if (sum3 != 0)
+    {
+        cout << "INVALID" << endl;
+    }
+
+    else if (crednum / 1000000000000000 == 4)
+    {
+        cout << "VISA" << endl; //change to card name (string value)
+    }
+
+    else if (crednum / 1000000000000 == 4)
+    {
+        cout << "VISA" << endl;
+    }
+
+    else if (crednum / 100000000000000 == 51 || crednum / 100000000000000 == 52 || crednum / 100000000000000 == 53 || crednum / 100000000000000 == 54 || crednum / 100000000000000 == 55)
+    {
+        cout << "MASTERCARD" << endl;
+    }
+
+    else if (crednum / 10000000000000 == 34 || crednum / 10000000000000 == 37)
+    {
+        cout << "AMEX" << endl;
+    }
+
+    else //for non-integer inputs
+    {
+        cout << "INVALID" << endl;
+    }
+
+    system("pause");
+}
