@@ -1,0 +1,82 @@
+//Create a program that takes an encryption key and message as input and returns the message encrypted as output
+
+#include <iostream>
+#include <cstring>
+#include <stdlib.h>  //need for atoi
+#include <string>
+using namespace std;
+
+string key;
+string plaintext;
+
+    int main()
+    {
+
+            cout << "Define Encryption Key (integer value)" << endl;
+            cout << "Key: ";
+            cin >> key;
+            int n = key.size();
+            int letter = 0;
+            
+            for (int i = 0; i < n; i++)     //test each char in string key to check for non-digits
+            {
+                int a = isdigit(key[i]);
+                if (a == 0)
+                {
+                    letter = letter + 1;  //if string containts non-digit char, increase value of letter by 1
+                }
+
+            }
+            int code = atoi(key.c_str());   //need to use c_str to use atoi function similiar to C
+            if (code != 0 && letter == 0)
+            {
+                cout << "Type message to encrypt: "; //Prompts user for plain text
+                cin.ignore(1, '\n'); //add this so getline ignores empty line
+                //cin >> plaintext;
+                getline(cin, plaintext);                //getline should allow for multiple words in string
+                int m = plaintext.size();             //Use length of plain text as stopping point for the following for loop
+                string cyphertext = plaintext;      //initialize string cyphertext. //Will print final value at very end
+                //cout << "Test: " << plaintext << endl;
+
+
+                for (int j = 0; j < m; j++)     //for loop to change each char in cyphertext[j] for m iterations 
+                {
+                    if (isupper(plaintext[j])) //if char is uppercase //uses different ASCII value
+                    {
+                        cyphertext[j] = (((plaintext[j] + code) - 65) % 26) + 65;  // Ci = (Pi + K) % 26 //Subtracting by lowest ASCII value tells you how much 'extra' you have.            
+                    }                                                           //Modular 26 will tell you how many 'lengths' of the alphabet that extra amounts to.
+
+                    else if (islower(plaintext[j])) //if char is lowercase //uses different ASCII value
+                    {
+                        cyphertext[j] = (((plaintext[j] + code) - 97) % 26) + 97;  // Ci = (Pi + K) % 26
+                    }
+
+                    else if (isdigit(plaintext[j])) //if char is a digit //uses different ASCII value
+                    {
+                        cyphertext[j] = (((plaintext[j] + code) - 48) % 10) + 48;  // Ci = (Pi + K) % 10
+                    }
+
+                    else if (plaintext[j] > 32 && plaintext[j] < 48) //if char is a special character(33-47) //uses different ASCII value
+                    {
+                        cyphertext[j] = (((plaintext[j] + code) - 33) % 15) + 33;
+                    }
+
+                    else if (plaintext[j] > 57 && plaintext[j] < 65) //if char is a special character(58-64) //uses different ASCII value
+                    {
+                        cyphertext[j] = (((plaintext[j] + code) - 58) % 7) + 58;
+                    }
+
+                    else if (plaintext[j] > 90 && plaintext[j] < 97) //if char is a special character(91-96) //uses different ASCII value
+                    {
+                        cyphertext[j] = (((plaintext[j] + code) - 91) % 6) + 91;
+                    }
+
+                    else if (plaintext[j] > 122 && plaintext[j] < 127) //if char is a special character(123-126) //uses different ASCII value
+                    {
+                        cyphertext[j] = (((plaintext[j] + code) - 123) % 4) + 123;
+                    }
+                }
+                cout << "Encrypted message: " << cyphertext << endl;
+            }
+            system("pause");
+    }
